@@ -127,22 +127,16 @@ const tourSchema = new mongoose.Schema({
       },
     },
   },
-  images: [
+  /*images: [
     {
       type: String,
       required: true,
     },
-  ],
+  ],*/
   tourGuides: [
     {
-      name: {
-        type: String,
-        required: true,
-      },
-      picture: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
     },
   ],
   toursIncluded: [

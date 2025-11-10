@@ -60,13 +60,13 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['tourCompany', null],
+    enum: ['tourCompany', 'customer'],
     default: null,
   },
-  profilePhoto: {
+  /*profilePhoto: {
     type: String,
     default: '',
-  },
+  },*/
   description: {
     type: String,
     default: '',
@@ -76,11 +76,6 @@ const userSchema = new mongoose.Schema({
       tour: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tour',
-        required: true,
-      },
-      addedAt: {
-        type: Date,
-        default: Date.now,
       },
     },
   ],
