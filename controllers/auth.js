@@ -19,10 +19,11 @@ router.post('/sign-up', async (req, res) => {
     req.body.hashedPassword = hashedPassword;
 
     const newUser = await User.create(req.body);
-
+    console.log(newUser)
     const payload = {
       username: newUser.username,
       _id: newUser._id,
+      role: newUser.role
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET);
@@ -47,10 +48,11 @@ router.post('/sign-in', async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({ err: 'Username or Password is invalid' });
     }
-
+    console.log(req.body)
     const payload = {
       username: userInDatabase.username,
       _id: userInDatabase._id,
+      role: userInDatabase.role
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET);
@@ -58,7 +60,7 @@ router.post('/sign-in', async (req, res) => {
     res.json({ token, user: userInDatabase });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ err: 'Invalid Username or Password' });
+    res.status(500).json({ err: err.message });
   }
 });
 
