@@ -34,10 +34,29 @@ router.post("/", verifyToken, async (req, res) => {
 // index
 router.get("/", verifyToken, async (req, res) => {
   try {
-    const tours = await Tour.find({})
-      .populate("company")
-      .sort({ datePosted: "desc" });
-    res.status(200).json(tours);
+    const { category, country, city, price } = req.query;
+
+    // filter object dynamically
+    const filter = {};
+
+    if (category) filter.category = category;
+
+    if (country) filter['location.country'] = country;
+
+    if (city) filter['location.cities'] = { $in: [city] };
+
+    // Price range (filter by adult price as reference)
+    if (price) {
+      filter['pricing.adult.price'] = { $lte: Number(price) };
+    }
+
+
+    const tours = await Tour.find(filter)
+    .populate("company", "username email description")
+    .sort({ datePosted: -1 });
+
+  res.status(200).json(tours);
+
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
