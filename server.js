@@ -15,6 +15,7 @@ const testJwtRouter = require('./controllers/test-jwt');
 const authCtrl = require('./controllers/auth');
 const usersCtrl = require('./controllers/users');
 const toursCtrl = require('./controllers/tours');
+const bookingsCtrl = require('./controllers/bookings');
 
 // MiddleWare
 const verifyToken = require('./middleware/verify-token');
@@ -37,6 +38,7 @@ app.use('/test-jwt', testJwtRouter);
 app.use(verifyToken);
 app.use('/users', usersCtrl);
 app.use('/tours', toursCtrl);
+app.use('/bookings', bookingsCtrl);
 
 app.listen(PORT, () => {
   console.log('The express app is ready!');
