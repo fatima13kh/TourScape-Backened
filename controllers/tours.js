@@ -92,6 +92,11 @@ router.delete("/:tourId", verifyToken, async (req, res) => {
       return res.status(403).json({ err: "You're not allowed to do that!" });
     }
 
+    // Check if tour has any bookings
+    if (tour.attendees && tour.attendees.length > 0) {
+      return res.status(400).json({ err: "Cannot delete a tour that already has bookings" });
+    }
+
     // Remove tour from company's travelPosts
     await User.findByIdAndUpdate(
       req.user._id,
