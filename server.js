@@ -16,7 +16,7 @@ const authCtrl = require('./controllers/auth');
 const usersCtrl = require('./controllers/users');
 const toursCtrl = require('./controllers/tours');
 const bookingsCtrl = require('./controllers/bookings');
-
+const companiesCtrl = require('./controllers/companies');
 
 // MiddleWare
 const verifyToken = require('./middleware/verify-token');
@@ -40,7 +40,7 @@ app.use(verifyToken);
 app.use('/users', usersCtrl);
 app.use('/tours', toursCtrl);
 app.use('/bookings', bookingsCtrl);
-
+app.use('/companies', companiesCtrl);
 
 app.listen(PORT, () => {
   console.log('The express app is ready!');
