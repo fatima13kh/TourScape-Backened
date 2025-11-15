@@ -4,6 +4,8 @@ const router = express.Router();
 
 const User = require('../models/user');
 
+const verifyToken = require('../middleware/verify-token');
+
 router.get('/', async (req, res) => {
   try {
     // Get a list of all users, but only return their username and _id
@@ -97,6 +99,29 @@ router.get('/:id', async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ error: 'Server error', details: err.message });
+  }
+});
+
+// update user profile
+router.put('/:id', verifyToken, async (req, res) => {
+  try {
+    // To Ensure the logged-in user matches the profile being updated
+    if (req.user._id.toString() != req.params.id) {
+      return res.status(403).json({ err: 'You can only edit your own profile' });
+    }
+
+    const { username, email, phone, description } = req.body;
+
+    const updateUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {username, email, phone, description},
+      {new: true}
+    ).select('-hashedPassword'); // To Exclude password
+
+    res.json(updateUser);
+
+  } catch (err) {
+    res.status(500).json({ err: err.message });
   }
 });
 

@@ -15,6 +15,13 @@ router.post('/sign-up', async (req, res) => {
       });
     }
 
+    const emailInDatabase = await User.findOne({ email: req.body.email });
+    if (emailInDatabase) {
+      return res.status(409).json({
+        err: 'Username or Password is invalid',
+      });
+    }
+
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     req.body.hashedPassword = hashedPassword;
 
@@ -32,6 +39,7 @@ router.post('/sign-up', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ err: err.message});
+
   }
 });
 
