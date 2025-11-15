@@ -16,7 +16,7 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 });
-
+//Get
 // Get single company profile with their tours
 router.get("/:companyId", verifyToken, async (req, res) => {
   try {
