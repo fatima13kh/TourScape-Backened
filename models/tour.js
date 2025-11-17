@@ -127,12 +127,6 @@ const tourSchema = new mongoose.Schema({
       },
     },
   },
-  /*images: [
-    {
-      type: String,
-      required: true,
-    },
-  ],*/
   tourGuides: [
     {
       type: String,
