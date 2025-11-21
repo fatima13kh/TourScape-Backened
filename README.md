@@ -2,17 +2,6 @@
 
 ---
 
-![LandingPage](Assets/LandingPage.png)
-![SignIn](Assets/SignIn.png)
-![SignUp](Assets/SignUp.png)
-![Home](Assets/Home.png)
-![Companies](Assets/Companies.png)
-![CompaniesTours](Assets/CompaniesTours.png)
-![Booking](Assets/Booking.png)
-![Profile](Assets/Profile.png)
-
-
----
 
 ## 🎨 Project Title: TourScape
 
