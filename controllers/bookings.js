@@ -20,7 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
       return res.status(404).json({ err: "Tour not found" });
     }
 
-    // Check if tour is active // change later as model will be updated
+    // Check if tour is active 
     if (!tour.isActive) {
       return res.status(400).json({ err: "This tour is not available" });
     }

@@ -38,7 +38,8 @@ router.post('/sign-up', async (req, res) => {
     res.json({ token, user: newUser });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ err: 'Registration failed! Something went wrong!' });
+    res.status(500).json({ err: err.message});
+
   }
 });
 
@@ -47,7 +48,7 @@ router.post('/sign-in', async (req, res) => {
     const userInDatabase = await User.findOne({ username: req.body.username });
 
     if (!userInDatabase) {
-      return res.status(401).json({ err: 'Username or Password is invalid' });
+      return res.status(401).json({ err: err.message });
     }
 
     const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.hashedPassword);
