@@ -63,10 +63,6 @@ const userSchema = new mongoose.Schema({
     enum: ['tourCompany', 'customer'],
     default: null,
   },
-  /*profilePhoto: {
-    type: String,
-    default: '',
-  },*/
   description: {
     type: String,
     default: '',
